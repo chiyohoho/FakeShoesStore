@@ -11,3 +11,77 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.nav_category .nav_cat {
+  position: relative;
+  padding: 0px 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.nav_category .nav_cat::before {
+  position: absolute;
+  content: '';
+  bottom: -10px;
+  left: 50%;
+  height: 2px;
+  width: 0%;
+  background: black;
+  transition: all 0.3s linear;
+  transform: translateX(-50%);
+}
+
+.nav_category .nav_cat:hover::before {
+  width: 100%;
+  transition: all 0.3s linear;
+  transform: translateX(-50%);
+}
+
+/* ---------------- */
+.nav_icon {
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.nav_icon:hover {
+  background: #ccc;
+
+}
+
+/* ---------------------- */
+
+.card_item .card_image {
+  width: 100%;
+  transform: scale(0.8);
+  transition: all 0.3s linear;
+}
+
+.card_item:hover .card_image {
+  transform: scale(0.9);
+  transition: all 0.3s linear;
+}
+
+/* --------------------------- */
+
+.nav_category .nav_cat_res {
+  position: relative;
+  padding: 0px 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.nav_category .nav_cat_res::before {
+  position: absolute;
+  content: '';
+  bottom: -10px;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: black;
+  transition: all 0.3s linear;
+}
+
+.nav_category .nav_cat_res:hover::before {
+  width: 100%;
+  transition: all 0.3s linear;
+}
