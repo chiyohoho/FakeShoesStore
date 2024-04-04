@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../Context/AppContext'
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
+import { IoTrashBin } from 'react-icons/io5';
 
 const Cart = () => {
     const navigate = useNavigate()
@@ -54,6 +55,24 @@ const Cart = () => {
         navigate('/')
     }
 
+    const handleDeleteProduct = (paramIndex) => {
+        const newBagList = [...bagList];
+
+        let productIndex = -1;
+
+        for (let i = 0; i < newBagList.length; i++) {
+            if (i === paramIndex) {
+                productIndex = i;
+                break;
+            }
+        }
+
+        if (productIndex !== -1) {
+            newBagList.splice(productIndex, 1);
+        }
+
+        setBagList(newBagList);
+    };
 
     return (
         <Box>
@@ -70,7 +89,7 @@ const Cart = () => {
                             <Grid rowGap={10} templateColumns='repeat(1, 1fr)' >
                                 {bagList.map((item, index) => {
                                     return (
-                                        <GridItem key={item.id} w={'100%'} borderBottom={'1px solid #ccc'} pb={5}>
+                                        <GridItem key={index} w={'100%'} borderBottom={'1px solid #ccc'} pb={5}>
                                             <Flex>
                                                 <Box w={200} overflow={'hidden'}>
                                                     <Image mt={-5} src={item.image} alt={item.name} />
@@ -86,7 +105,7 @@ const Cart = () => {
                                                                     {item.sizes.map((size, index) => {
                                                                         if (size !== item.sizePicked) {
                                                                             return (
-                                                                                <option key={index} value={size}>{size}</option>
+                                                                                <option value={size}>{size}</option>
                                                                             );
                                                                         } else {
                                                                             return null
@@ -110,9 +129,15 @@ const Cart = () => {
                                                             </Flex>
                                                         </Box>
 
-                                                        <Box fontWeight={500} fontSize={20} textAlign={'right'} w={'100%'}>
-                                                            {(item.price * 24500 * item.amount).toLocaleString('vi', { style: 'currency', currency: 'VND' })}
-                                                        </Box>
+                                                        <Flex flexDir={'column'} alignItems={'flex-end'} fontWeight={500} fontSize={20} textAlign={'right'} w={'100%'}>
+                                                            <Text>
+                                                                {(item.price * 24500 * item.amount).toLocaleString('vi', { style: 'currency', currency: 'VND' })}
+                                                            </Text>
+
+                                                            <Button onClick={() => handleDeleteProduct(index)} w={50} mt={'auto'} bg={'black'} color={'white'} _hover={{ bg: 'gray' }}>
+                                                                <IoTrashBin />
+                                                            </Button>
+                                                        </Flex>
                                                     </Flex>
                                                 </Box>
                                             </Flex>
@@ -121,9 +146,6 @@ const Cart = () => {
                                     )
                                 })}
                             </Grid>
-
-
-
                         </Box>
 
                         <Box w={'60%'}>
