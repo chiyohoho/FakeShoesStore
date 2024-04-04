@@ -5,9 +5,9 @@ export const AppContext = createContext({})
 
 export const AppProvider = ({ children }) => {
     const [idProduct, setIdProduct] = useState(0)
-    const [userData, setUserData] = useState(null)
+    const [userData, setUserData] = useState({})
     const [isLogin, setIsLogin] = useState(false)
-    const [userAPI, setUserAPI] = useState(null)
+    const [userAPI, setUserAPI] = useState({})
     const [userReg, setUserReg] = useState({})
     const [dataAPI, setDataAPI] = useState([])
     const [bagList, setBagList] = useState([])

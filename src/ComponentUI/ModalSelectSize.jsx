@@ -2,10 +2,9 @@ import {
     Modal,
     ModalOverlay,
     ModalContent,
-    ModalHeader,
-    ModalFooter,
+
     ModalBody,
-    ModalCloseButton,
+
     useDisclosure,
     Button,
     Text,
@@ -20,7 +19,7 @@ import { AppContext } from '../Context/AppContext'
 
 function ModalSelectSize({ item, setProductAddToBag, productAddToBag }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const { showToast, bagList, setBagList } = useContext(AppContext)
+    const { showToast, setBagList } = useContext(AppContext)
 
 
     const [selectSize, setSelectSize] = useState(() => {

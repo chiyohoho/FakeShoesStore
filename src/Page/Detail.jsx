@@ -8,7 +8,7 @@ import { AppContext } from '../Context/AppContext';
 
 const Detail = () => {
     const navigate = useNavigate();
-    const { idProduct, dataAPI, showToast, bagList, setBagList, favList, setFavList, isLogin } = useContext(AppContext)
+    const { idProduct, dataAPI, showToast, bagList, setBagList, favList, setFavList, isLogin, userData, setUserData } = useContext(AppContext)
     const [productAddToBag, setProductAddToBag] = useState({})
     const dataAPINew = JSON.parse(localStorage.getItem('PRODUCT_DATA')) || dataAPI
     const [idData, setidData] = useState(String(JSON.parse(localStorage.getItem('PRODUCT_ID')) || String(idProduct)))
@@ -31,8 +31,10 @@ const Detail = () => {
             if (productAddToBag.sizes === undefined) {
                 showToast('Không thể thêm vào giỏ hàng', 'Vui lòng chọn 1 size trước rồi thử lại', 'warning')
             } else {
+                const newCart = [...userData.cart, productAddToBag]
                 showToast('Thành công thêm vào giỏ hàng', '', 'success')
                 setBagList(prev => ([...prev, productAddToBag]))
+                setUserData(prev => ({ ...prev, cart: newCart }))
             }
         } else {
             showToast('Cảnh báo!', 'Vui lòng đăng nhập trước và thử lại', 'warning')

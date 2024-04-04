@@ -1,5 +1,5 @@
-import { Box, Button, Center, Container, Flex, Grid, GridItem, Image, Text } from '@chakra-ui/react'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import { Box, Button, Container, Flex, Grid, GridItem, Image, Text } from '@chakra-ui/react'
+import React, { useContext, useEffect, useState } from 'react'
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { AppContext } from '../Context/AppContext'
 import ModalSelectSize from '../ComponentUI/ModalSelectSize';

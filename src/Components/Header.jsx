@@ -18,7 +18,7 @@ const Header = () => {
     const handleLogout = () => {
         localStorage.removeItem('USERLOGIN')
         setIsLogin(false)
-        setUserData(null)
+        setUserData({})
         showToast('Đăng xuất thành công', 'Success', 'success')
         onClose()
         window.location.pathname === '/Favourite' ? navigation('/') : window.location.reload()
@@ -39,7 +39,6 @@ const Header = () => {
             setIsLogin(true);
         } else {
             setIsLogin(false);
-            setUserData(null);
         }
     }, [isLogin]);
 
@@ -57,6 +56,7 @@ const Header = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
 
     return (
         <Box>
