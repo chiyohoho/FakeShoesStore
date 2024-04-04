@@ -55,24 +55,15 @@ const Cart = () => {
         navigate('/')
     }
 
-    const handleDeleteProduct = (paramIndex) => {
-        const newBagList = [...bagList];
+    const handleDeleteProduct = (productIndex) => {
+        const newBagList = [...bagList]
+        const indexOfProduct = newBagList.findIndex((item, index) => index === productIndex)
 
-        let productIndex = -1;
-
-        for (let i = 0; i < newBagList.length; i++) {
-            if (i === paramIndex) {
-                productIndex = i;
-                break;
-            }
+        if (indexOfProduct !== -1) {
+            newBagList.splice(indexOfProduct, 1)
+            setBagList(newBagList)
         }
-
-        if (productIndex !== -1) {
-            newBagList.splice(productIndex, 1);
-        }
-
-        setBagList(newBagList);
-    };
+    }
 
     return (
         <Box>
@@ -105,7 +96,7 @@ const Cart = () => {
                                                                     {item.sizes.map((size, index) => {
                                                                         if (size !== item.sizePicked) {
                                                                             return (
-                                                                                <option value={size}>{size}</option>
+                                                                                <option key={index} value={size}>{size}</option>
                                                                             );
                                                                         } else {
                                                                             return null
