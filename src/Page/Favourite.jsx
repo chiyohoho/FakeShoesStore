@@ -57,7 +57,7 @@ const Favourite = () => {
 
 
     return (
-        <Box>
+        <Box minH={'50vh'}>
             <Container my={70} maxW={'95vw'}>
                 <Box>
                     <Box pos={'fixed'} zIndex={10} right={20} bottom={20} display={scrollY > 300 ? 'block' : 'none'}>
@@ -90,12 +90,12 @@ const Favourite = () => {
                             </Flex>
                         </Box>
                         :
-                        <Grid mt={12} rowGap={10} templateColumns='repeat(3, 1fr)' gap={10}>
+                        <Grid mt={12} rowGap={10} templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} gap={10}>
                             {favList.map((item, index) => {
                                 return (
                                     <GridItem key={item.id} w='100%' pos={'relative'}>
                                         <Box>
-                                            <Image src={item.image} alt={item.name} />
+                                            <Image w={'100%'} src={item.image} alt={item.name} />
                                         </Box>
                                         <Flex justifyContent={'space-between'} mt={5}>
                                             <Box>
@@ -112,7 +112,6 @@ const Favourite = () => {
                                                 {item.isFavourite ? <GoHeartFill /> : <GoHeart />}
                                             </Box>
                                         </Box>
-
                                     </GridItem>
                                 )
                             })}

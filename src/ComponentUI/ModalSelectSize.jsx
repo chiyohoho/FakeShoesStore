@@ -39,6 +39,7 @@ function ModalSelectSize({ item, setProductAddToBag, productAddToBag }) {
         } else {
             showToast('Đã thêm vào giỏ hàng', '', 'success')
             setBagList(prev => ([...prev, productAddToBag]))
+            onClose()
         }
     }
 
@@ -48,16 +49,16 @@ function ModalSelectSize({ item, setProductAddToBag, productAddToBag }) {
                 <Button border={'1px solid #ccc'} _hover={{ border: '1px solid black' }} rounded={30} p={6} variant={'outline'}>Select Size</Button>
             </Box>
 
-            <Modal size={'4xl'} isOpen={isOpen} onClose={onClose}>
+            <Modal size={['sm', 'md', 'lg', '4xl', '4xl', '4xl']} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalBody>
-                        <Flex>
-                            <Box w={'80%'} overflow={'hidden'}>
-                                <Image mt={-10} mb={16} w={'100%'} transform={'scale(1.1)'} src={item.image} alt={item.name} />
+                        <Flex flexDir={['column', 'column', 'column', 'row', 'row']}>
+                            <Box w={'80%'} overflow={'hidden'} m={'0 auto'}>
+                                <Image mt={-10} w={'100%'} transform={'scale(1.1)'} src={item.image} alt={item.name} />
                             </Box>
 
-                            <Flex w={'80%'} flexDir={'column'} justifyContent={'space-between'} p={5}>
+                            <Flex w={'80%'} flexDir={'column'} justifyContent={'space-between'} p={5} gap={5}>
                                 <Box>
                                     <Text fontSize={18} fontWeight={500}>{item.category}</Text>
                                     <Text fontSize={30} fontWeight={500}>{item.name}</Text>

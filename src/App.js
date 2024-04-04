@@ -11,6 +11,7 @@ import Home from './Page/Home';
 import Profile from './Page/Profile';
 import Favourite from './Page/Favourite';
 import Cart from './Page/Cart';
+import Footer from './Components/Footer';
 
 
 function App() {
@@ -21,13 +22,13 @@ function App() {
       <AppProvider>
         <Routes>
           <Route path='/' element={<><Home /></>} />
-          <Route path='/Detail' element={<><Header /><Detail /></>} />
+          <Route path='/Detail' element={<><Header /><Detail /><Footer /></>} />
           <Route path='/SignInOrJoinUs' element={<SignInOrJoinUs />} />
           <Route path='/JoinUs' element={<JoinUs />} />
           <Route path='/SignIn' element={<SignIn />} />
           <Route path='/Profile' element={<Profile />} />
-          <Route path='/Favourite' element={<><Header /><Favourite /></>} />
-          <Route path='/Cart' element={<><Header /><Cart /></>} />
+          <Route path='/Favourite' element={<><Header /><Favourite /><Footer /></>} />
+          <Route path='/Cart' element={<><Header /><Cart /><Footer /></>} />
         </Routes>
       </AppProvider>
 

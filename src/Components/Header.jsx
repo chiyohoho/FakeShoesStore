@@ -166,7 +166,7 @@ const Header = () => {
                             </Box>
 
                             <Box className='nav_icon' display={{ base: 'block', sm: 'block', md: 'none' }}>
-                                <Box onClick={() => navigation('/SignInOrJoinUs')} p={2} fontSize={20}>
+                                <Box onClick={() => isLogin ? navigation('/Profile') : navigation('/SignInOrJoinUs')} p={2} fontSize={20}>
                                     <FaRegUser />
                                 </Box>
                             </Box>
