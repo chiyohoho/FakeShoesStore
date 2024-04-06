@@ -55,7 +55,6 @@ const Favourite = () => {
         setIsEdit(false)
     }
 
-
     return (
         <Box minH={'50vh'}>
             <Container my={70} maxW={'95vw'}>

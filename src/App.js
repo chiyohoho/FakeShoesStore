@@ -31,8 +31,6 @@ function App() {
           <Route path='/Cart' element={<><Header /><Cart /><Footer /></>} />
         </Routes>
       </AppProvider>
-
-
     </Router >
   );
 }
