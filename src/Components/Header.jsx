@@ -1,10 +1,9 @@
-import { Box, Button, Container, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Input, InputGroup, InputLeftElement, Text, useDisclosure } from '@chakra-ui/react'
-import { v4 as uuidv4 } from 'uuid';
+import { Box, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Input, InputGroup, InputLeftElement, Text, useDisclosure } from '@chakra-ui/react'
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { IoSearchOutline, IoHeartOutline, IoBagOutline, IoMenu, IoArrowUp, IoArrowForward, IoPlayForward, IoChevronForward, IoReorderFour, IoLogoXbox, IoLogoDropbox, IoStorefront, IoStorefrontOutline, IoHelpCircleOutline } from "react-icons/io5";
-import { BsBox2, BsPersonFillExclamation } from "react-icons/bs";
+import { IoSearchOutline, IoHeartOutline, IoBagOutline, IoMenu, IoChevronForward, IoStorefrontOutline, IoHelpCircleOutline } from "react-icons/io5";
+import { BsBox2, BsHeart } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
 import { AppContext } from '../Context/AppContext';
 
@@ -13,20 +12,30 @@ const Header = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
 
-    const { isLogin, setIsLogin, userData, setUserData, showToast, bagList, favList } = useContext(AppContext)
+    const { isLogin, setIsLogin, userData, setUserData, showToast, currentUserData, setCurrentUserData } = useContext(AppContext)
 
     const handleLogout = () => {
         localStorage.removeItem('USERLOGIN')
         setIsLogin(false)
         setUserData({})
+        setCurrentUserData({})
         showToast('Đăng xuất thành công', 'Success', 'success')
         onClose()
-        window.location.pathname === '/Favourite' ? navigation('/') : window.location.reload()
+        localStorage.removeItem('CURRENT_USER_DATA')
+        window.location.pathname === '/Favourite' || window.location.pathname === '/Cart' ? navigation('/') : window.location.reload()
     }
 
     const handleRedirectToFavourite = () => {
         if (isLogin) {
             navigation('/Favourite')
+        } else {
+            showToast('Cảnh báo!', 'Vui lòng đăng nhập trước và thử lại', 'warning')
+        }
+    }
+
+    const handleRedirectToCart = () => {
+        if (isLogin) {
+            navigation('/Cart')
         } else {
             showToast('Cảnh báo!', 'Vui lòng đăng nhập trước và thử lại', 'warning')
         }
@@ -42,26 +51,11 @@ const Header = () => {
         }
     }, [isLogin]);
 
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth)
-            onClose()
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
 
     return (
         <Box>
             <Box display={{ base: 'none', sm: 'none', md: 'block' }} bg={'#f5f5f5'}>
-                <Container maxW={'95vw'}>
+                <Box mx={'auto'} maxW={'95vw'}>
                     <Flex py={2} justifyContent={'space-between'}>
                         <Box onClick={() => navigation('/')}>
                             <svg height="24px" width="24px" fill="#111" viewBox="0 0 26 32">
@@ -100,35 +94,35 @@ const Header = () => {
                             }
                         </Flex>
                     </Flex>
-                </Container>
+                </Box>
             </Box>
 
             <Box>
-                <Container maxW={'95vw'}>
+                <Box mx={'auto'} maxW={'95vw'}>
                     <Flex alignItems={'center'} justifyContent={'space-between'}>
-                        <Box onClick={() => navigation('/')} ml={-2}>
+                        <Box w={['fit-content', 'fit-content', '40%', '40%', '40%', '40%']} onClick={() => navigation('/')} ml={-2}>
                             <svg aria-hidden="true" className="pre-logo-svg" focusable="false" viewBox="0 0 24 24" role="img" width="72px" height="72px" fill="none"><path fill="currentColor" fillRule="evenodd" d="M21 8.719L7.836 14.303C6.74 14.768 5.818 15 5.075 15c-.836 0-1.445-.295-1.819-.884-.485-.76-.273-1.982.559-3.272.494-.754 1.122-1.446 1.734-2.108-.144.234-1.415 2.349-.025 3.345.275.2.666.298 1.147.298.386 0 .829-.063 1.316-.19L21 8.719z" clipRule="evenodd"></path></svg>
                         </Box>
 
-                        <Box display={{ base: 'none', sm: 'none', md: 'block' }}>
-                            <Flex alignItems={'center'} fontSize={18} className='nav_category' gap={5}>
+                        <Box w={'100%'} display={{ base: 'none', sm: 'none', md: 'block' }}>
+                            <Flex alignItems={'center'} justifyContent={'center'} fontSize={[13, 14, 15, 16, 17, 18]} className='nav_category' gap={5}>
                                 <Text className='nav_cat'>New & Featured</Text>
 
                                 <Text className='nav_cat'>Men</Text>
 
                                 <Text className='nav_cat'>Women</Text>
 
-                                <Text display={windowWidth < 900 ? 'none' : 'block'} className='nav_cat'>Kids</Text>
+                                <Text display={['none', 'none', 'none', 'block', 'block', 'block']} className='nav_cat'>Kids</Text>
 
-                                <Text display={windowWidth < 1000 ? 'none' : 'block'} className='nav_cat'>Sale</Text>
+                                <Text display={['none', 'none', 'none', 'block', 'block', 'block']} className='nav_cat'>Sale</Text>
 
-                                <Text display={windowWidth < 1100 ? 'none' : 'block'} className='nav_cat'>Customise</Text>
+                                <Text display={['none', 'none', 'none', 'none', 'block', 'block']} className='nav_cat'>Customise</Text>
 
-                                <Text display={windowWidth < 1200 ? 'none' : 'block'} className='nav_cat'>SNKRS</Text>
+                                <Text display={['none', 'none', 'none', 'none', 'none', 'block']} className='nav_cat'>SNKRS</Text>
                             </Flex>
                         </Box>
 
-                        <Flex gap={5} alignItems={'center'} justifyContent={'space-between'}>
+                        <Flex w={['50%', '50%', '40%', '40%', '40%', '40%']} alignItems={'center'} justifyContent={'space-between'}>
                             <Box>
                                 <InputGroup display={{ base: 'none', sm: 'none', md: 'block' }}>
                                     <InputLeftElement>
@@ -144,26 +138,48 @@ const Header = () => {
                                 </Box>
                             </Box>
 
-
-                            <Box onClick={handleRedirectToFavourite} className='nav_icon' display={{ base: 'none', sm: 'none', md: 'block' }}>
+                            {isLogin ? <Box onClick={handleRedirectToFavourite} className='nav_icon' display={{ base: 'none', sm: 'none', md: 'block' }}>
                                 <Box pos={'relative'} px={2} pb={2} pt={2.5} fontSize={28}>
                                     <IoHeartOutline />
-                                    <Text display={favList.length > 0 ? 'block' : 'none'} pos={'absolute'} content='""' fontSize={11.5} fontWeight={500}
+                                    <Text display={currentUserData.favourite.length > 0 ? 'block' : 'none'} pos={'absolute'} content='""' fontSize={11.5} fontWeight={500}
                                         top={'50%'} left={'50%'} transform={'translate(-50%,-50%)'} mt={'1px'}>
-                                        {favList.length > 9 ? '9+' : favList.length}
+                                        {currentUserData.favourite.length > 9 ? '9+' : currentUserData.favourite.length}
                                     </Text>
                                 </Box>
                             </Box>
+                                :
+                                <Box onClick={handleRedirectToFavourite} className='nav_icon' display={{ base: 'none', sm: 'none', md: 'block' }}>
+                                    <Box pos={'relative'} px={2} pb={2} pt={2.5} fontSize={28}>
+                                        <IoHeartOutline />
+                                        <Text display={'block'} pos={'absolute'} content='""' fontSize={11.5} fontWeight={500}
+                                            top={'50%'} left={'50%'} transform={'translate(-50%,-50%)'} mt={'1px'}>
+                                        </Text>
+                                    </Box>
+                                </Box>
+                            }
 
-                            <Box onClick={() => navigation('/Cart')} display={'block'} className='nav_icon'>
-                                <Box pos={'relative'} p={2} fontSize={24}>
-                                    <IoBagOutline />
-                                    <Text display={bagList.length > 0 ? 'block' : 'none'} pos={'absolute'} content='""' fontSize={12} fontWeight={500}
-                                        top={'50%'} left={'50%'} transform={'translate(-50%,-50%)'} mt={'3px'}>
-                                        {bagList.length > 9 ? '9+' : bagList.length}
-                                    </Text>
+                            {isLogin ?
+                                <Box onClick={() => handleRedirectToCart()} display={'block'} className='nav_icon'>
+                                    <Box pos={'relative'} p={2} fontSize={24}>
+                                        <IoBagOutline />
+                                        <Text display={currentUserData.cart.length > 0 ? 'block' : 'none'} pos={'absolute'} content='""' fontSize={12} fontWeight={500}
+                                            top={'50%'} left={'50%'} transform={'translate(-50%,-50%)'} mt={'3px'}>
+                                            {currentUserData.cart.length > 9 ? '9+' : currentUserData.cart.length}
+                                        </Text>
+                                    </Box>
                                 </Box>
-                            </Box>
+                                :
+                                <Box onClick={() => handleRedirectToCart()} display={'block'} className='nav_icon'>
+                                    <Box pos={'relative'} p={2} fontSize={24}>
+                                        <IoBagOutline />
+                                        <Text display={'block'} pos={'absolute'} content='""' fontSize={12} fontWeight={500}
+                                            top={'50%'} left={'50%'} transform={'translate(-50%,-50%)'} mt={'3px'}>
+                                            {/* {currentUserData && currentUserData.cart.length > 9 ? '9+' : currentUserData.cart.length} */}
+                                        </Text>
+                                    </Box>
+                                </Box>
+                            }
+
 
                             <Box className='nav_icon' display={{ base: 'block', sm: 'block', md: 'none' }}>
                                 <Box onClick={() => isLogin ? navigation('/Profile') : navigation('/SignInOrJoinUs')} p={2} fontSize={20}>
@@ -266,11 +282,14 @@ const Header = () => {
 
                                             <Flex justifyContent={'center'} mt={20} >
                                                 <Flex flexDir={'column'} gap={4} >
-                                                    <Flex cursor={'pointer'} gap={2} alignItems={'center'}>
+                                                    <Flex onClick={() => {
+                                                        navigation('/favourite')
+                                                        onClose()
+                                                    }} cursor={'pointer'} gap={2} alignItems={'center'}>
                                                         <Box fontSize={24}>
-                                                            <IoBagOutline />
+                                                            <BsHeart />
                                                         </Box>
-                                                        <Text fontSize={20} fontWeight={500}>Bag</Text>
+                                                        <Text fontSize={20} fontWeight={500}>Favorite</Text>
                                                     </Flex>
 
                                                     <Flex cursor={'pointer'} gap={2} alignItems={'center'}>
@@ -301,7 +320,7 @@ const Header = () => {
                             </Box>
                         </Flex>
                     </Flex>
-                </Container>
+                </Box>
             </Box>
         </Box>
     )

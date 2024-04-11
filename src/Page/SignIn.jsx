@@ -10,7 +10,7 @@ import { IoEye, IoEyeOff } from 'react-icons/io5';
 
 const SignIn = () => {
     const navigation = useNavigate()
-    const { userReg, userAPI, setUserAPI, showToast, idProduct } = useContext(AppContext)
+    const { userReg, userAPI, setUserAPI, showToast, idProduct, setCurrentUserData } = useContext(AppContext)
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
 
@@ -34,6 +34,8 @@ const SignIn = () => {
             showToast('Đăng nhập thành công', '', 'info')
             localStorage.setItem('USERLOGIN', JSON.stringify(checkLogin))
             idProduct ? navigation('/Detail') : navigation('/')
+            setCurrentUserData(checkLogin)
+            localStorage.setItem('CURRENT_USER_DATA', JSON.stringify(checkLogin))
 
         } else {
             showToast('Sai password', 'vui lòng thử lại', 'error')
@@ -52,7 +54,7 @@ const SignIn = () => {
 
     return (
         <Center>
-            <Box px={5} m={'50px auto'} minW={250} >
+            <Box px={5} m={'50px auto'} w={[360, 400, 440, 480, 520, 560]} >
                 <Flex gap={5}>
                     <Box cursor={'pointer'} fontSize={50} onClick={() => navigation('/')}>
                         <SiNike />

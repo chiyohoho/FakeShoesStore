@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Input, InputGroup, InputRightElement, Text } from '@chakra-ui/react'
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { SiNike, SiJordan } from "react-icons/si";
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { IoEye, IoEyeOff } from 'react-icons/io5';
 const JoinUs = () => {
     const navigation = useNavigate()
     const [country, setCountry] = useState('Vietnam')
-    const { setUserData, userReg } = useContext(AppContext)
+    const { userReg } = useContext(AppContext)
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
 
@@ -39,7 +39,7 @@ const JoinUs = () => {
     }
 
     return (
-        <Box m={'50px auto'} w={'25vw'} >
+        <Box px={5} m={'50px auto'} w={[360, 400, 440, 480, 520, 560]}  >
             <Flex gap={5}>
                 <Box cursor={'pointer'} fontSize={50} onClick={() => navigation('/')}>
                     <SiNike />

@@ -26,7 +26,7 @@ function App() {
           <Route path='/SignInOrJoinUs' element={<SignInOrJoinUs />} />
           <Route path='/JoinUs' element={<JoinUs />} />
           <Route path='/SignIn' element={<SignIn />} />
-          <Route path='/Profile' element={<Profile />} />
+          <Route path='/Profile' element={<><Header /><Profile /><Footer /></>} />
           <Route path='/Favourite' element={<><Header /><Favourite /><Footer /></>} />
           <Route path='/Cart' element={<><Header /><Cart /><Footer /></>} />
         </Routes>

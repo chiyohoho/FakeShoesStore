@@ -6,7 +6,7 @@ import ModalSelectSize from '../ComponentUI/ModalSelectSize';
 import { useNavigate } from 'react-router-dom';
 
 const Favourite = () => {
-    const { favList, setFavList } = useContext(AppContext)
+    const { currentUserData, setCurrentUserData } = useContext(AppContext)
     const [isEdit, setIsEdit] = useState(false)
     const [productAddToBag, setProductAddToBag] = useState({})
     const navigate = useNavigate();
@@ -29,8 +29,6 @@ const Favourite = () => {
         }
     }, [])
 
-    console.log('check scrollY:', scrollY)
-
     const handleMoveToTop = () => {
         window.scrollTo({
             top: 0,
@@ -38,22 +36,25 @@ const Favourite = () => {
         })
     }
 
-
     const handleChangeFavourite = (itemID) => {
-        const newFavList = favList.map(item => {
+        const newFavList = currentUserData.favourite.map(item => {
             if (item.id === itemID) {
                 return { ...item, isFavourite: !item.isFavourite }
             }
             return item
         })
-        setFavList(newFavList)
+        setCurrentUserData(prev => ({ ...prev, favourite: newFavList }))
     }
 
     const handleSaveChangeFavourite = () => {
-        const newFavListAfterSaveChange = favList.filter(item => item.isFavourite)
-        setFavList(newFavListAfterSaveChange)
+        const newFavListAfterSaveChange = currentUserData.favourite.filter(item => item.isFavourite)
+        setCurrentUserData(prev => ({ ...prev, favourite: newFavListAfterSaveChange }))
         setIsEdit(false)
     }
+
+    useEffect(() => {
+        localStorage.setItem('CURRENT_USER_DATA', JSON.stringify(currentUserData))
+    }, [currentUserData])
 
     return (
         <Box minH={'50vh'}>
@@ -64,6 +65,7 @@ const Favourite = () => {
                             Move to Top
                         </Button>
                     </Box>
+
                     <Flex alignItems={'center'} justifyContent={'space-between'} >
                         <Box>
                             <Text fontSize={24}>
@@ -71,7 +73,7 @@ const Favourite = () => {
                             </Text>
                         </Box>
 
-                        <Box display={favList.length > 0 ? 'block' : 'none'} >
+                        <Box display={currentUserData.favourite.length > 0 ? 'block' : 'none'} >
                             <Box display={isEdit ? 'none' : 'block'}>
                                 <Button onClick={() => setIsEdit(true)} border={'1px solid #ccc'} _hover={{ border: '1px solid black' }} rounded={15} p={6} variant={'outline'}>Edit</Button>
                             </Box>
@@ -81,7 +83,7 @@ const Favourite = () => {
                         </Box>
                     </Flex>
 
-                    {favList.length === 0 ?
+                    {currentUserData.favourite.length === 0 ?
                         <Box mt={50}>
                             <Flex alignItems={'center'} justifyContent={'center'} flexDir={'column'}>
                                 <Text fontSize={50} fontWeight={500}>Danh sách yêu thích hiện đang trống</Text>
@@ -90,7 +92,7 @@ const Favourite = () => {
                         </Box>
                         :
                         <Grid mt={12} rowGap={10} templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} gap={10}>
-                            {favList.map((item, index) => {
+                            {currentUserData.favourite.map((item, index) => {
                                 return (
                                     <GridItem key={item.id} w='100%' pos={'relative'}>
                                         <Box>

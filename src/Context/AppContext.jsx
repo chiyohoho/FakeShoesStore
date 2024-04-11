@@ -13,6 +13,7 @@ export const AppProvider = ({ children }) => {
     const [bagList, setBagList] = useState([])
     const [favList, setFavList] = useState([])
     const [productAddToBag, setProductAddToBag] = useState({})
+    const [currentUserData, setCurrentUserData] = useState(JSON.parse(localStorage.getItem('CURRENT_USER_DATA')) || {})
 
     const toast = useToast()
     const showToast = (title, description, status) => {
@@ -29,7 +30,7 @@ export const AppProvider = ({ children }) => {
     return <AppContext.Provider value={{
         showToast, idProduct, setIdProduct, userData, setUserData, isLogin, setIsLogin, userAPI,
         setUserAPI, userReg, setUserReg, dataAPI, setDataAPI, productAddToBag, setProductAddToBag,
-        bagList, setBagList, favList, setFavList
+        bagList, setBagList, favList, setFavList, currentUserData, setCurrentUserData
     }}>
         {children}
     </AppContext.Provider>

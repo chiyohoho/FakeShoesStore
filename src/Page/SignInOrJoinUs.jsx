@@ -1,6 +1,6 @@
 import { Box, Button, Center, Flex, Input, Text } from '@chakra-ui/react'
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useForm } from 'react-hook-form';
 import { SiNike, SiJordan } from "react-icons/si";
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { AppContext } from '../Context/AppContext';
 
 const SignInOrJoinUs = () => {
     const navigation = useNavigate()
-    const { userAPI, setUserAPI, userReg, setUserReg } = useContext(AppContext)
+    const { userAPI, setUserAPI, setUserReg } = useContext(AppContext)
 
     const {
         register,
@@ -47,7 +47,7 @@ const SignInOrJoinUs = () => {
 
     return (
         <Center>
-            <Box px={5} m={'50px auto'} minW={200}>
+            <Box px={5} m={'50px auto'} w={[360, 400, 440, 480, 520, 560]}>
                 <Flex gap={5}>
                     <Box cursor={'pointer'} fontSize={50} onClick={() => navigation('/')}>
                         <SiNike />

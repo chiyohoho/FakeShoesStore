@@ -2,9 +2,7 @@ import {
     Modal,
     ModalOverlay,
     ModalContent,
-
     ModalBody,
-
     useDisclosure,
     Button,
     Text,
@@ -19,7 +17,7 @@ import { AppContext } from '../Context/AppContext'
 
 function ModalSelectSize({ item, setProductAddToBag, productAddToBag }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const { showToast, setBagList } = useContext(AppContext)
+    const { showToast, currentUserData, setCurrentUserData } = useContext(AppContext)
 
 
     const [selectSize, setSelectSize] = useState(() => {
@@ -37,8 +35,10 @@ function ModalSelectSize({ item, setProductAddToBag, productAddToBag }) {
         if (productAddToBag.sizePicked === undefined) {
             showToast('Không thể thêm vào giỏ hàng', 'Vui lòng chọn 1 size và thử lại', 'warning')
         } else {
+            const newCart = [...currentUserData.cart, productAddToBag]
+
             showToast('Đã thêm vào giỏ hàng', '', 'success')
-            setBagList(prev => ([...prev, productAddToBag]))
+            setCurrentUserData(prev => ({ ...prev, cart: newCart }))
             onClose()
         }
     }
