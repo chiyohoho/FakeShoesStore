@@ -15,7 +15,7 @@ const Body = () => {
                 setDataAPI(res.data)
                 localStorage.setItem('PRODUCT_DATA', JSON.stringify(res.data))
             })
-    })
+    }, [])
 
     const handleRedirect = (item) => {
         setIdProduct(item.id)
