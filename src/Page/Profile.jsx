@@ -7,53 +7,68 @@ const Profile = () => {
     const { currentUserData, } = useContext(AppContext)
 
     return (
-        <Box minH={'60vh'} maxW={'90vw'} my={20} mx={'auto'}>
+        <Box minH={'60vh'} maxW={'90vw'} mt={20} mx={'auto'}>
             <Text fontSize={28} fontWeight={450}>
                 Settings
             </Text>
 
-            <Flex mt={20} gap={40}>
-                <Flex flexDir={'column'} gap={5}>
-                    <Flex alignItems={'center'} gap={5}>
-                        <FiUser fontSize={24} />
-                        <Text fontSize={18} fontWeight={500}>Account Details</Text>
-                    </Flex>
+            <Box mt={5} display={['block', 'block', 'block', 'none', 'none', 'none']}>
+                <Select placeholder='Account Details' border={'1px solid black'} maxW={500}>
+                    <option>Payment Methods</option>
+                    <option>Delivery Addresses</option>
+                    <option>Shop Preferences</option>
+                    <option>Communication Preferences</option>
+                    <option>Privacy</option>
+                    <option>Profile Visibility</option>
+                    <option>Linked Account</option>
+                </Select>
+            </Box>
 
-                    <Flex alignItems={'center'} gap={5}>
-                        <FiCreditCard fontSize={24} />
-                        <Text fontSize={18} fontWeight={500}>Payment Methods</Text>
-                    </Flex>
 
-                    <Flex alignItems={'center'} gap={5}>
-                        <FiShoppingBag fontSize={24} />
-                        <Text fontSize={18} fontWeight={500}>Delivery Addresses</Text>
-                    </Flex>
+            <Flex mt={[0, 0, 0, 20, 20, 20]} gap={40}>
+                <Box display={['none', 'none', 'none', 'block', 'block', 'block']}>
+                    <Flex flexDir={'column'} gap={5}>
+                        <Flex alignItems={'center'} gap={5}>
+                            <FiUser fontSize={24} />
+                            <Text fontSize={18} fontWeight={500}>Account Details</Text>
+                        </Flex>
 
-                    <Flex alignItems={'center'} gap={5}>
-                        <FiEdit fontSize={24} />
-                        <Text fontSize={18} fontWeight={500}>Shop Preferences</Text>
-                    </Flex>
+                        <Flex alignItems={'center'} gap={5}>
+                            <FiCreditCard fontSize={24} />
+                            <Text fontSize={18} fontWeight={500}>Payment Methods</Text>
+                        </Flex>
 
-                    <Flex alignItems={'center'} gap={5}>
-                        <FiMail fontSize={24} />
-                        <Text fontSize={18} fontWeight={500}>Communication Preferences</Text>
-                    </Flex>
+                        <Flex alignItems={'center'} gap={5}>
+                            <FiShoppingBag fontSize={24} />
+                            <Text fontSize={18} fontWeight={500}>Delivery Addresses</Text>
+                        </Flex>
 
-                    <Flex alignItems={'center'} gap={5}>
-                        <FiUserCheck fontSize={24} />
-                        <Text fontSize={18} fontWeight={500}>Privacy</Text>
-                    </Flex>
+                        <Flex alignItems={'center'} gap={5}>
+                            <FiEdit fontSize={24} />
+                            <Text fontSize={18} fontWeight={500}>Shop Preferences</Text>
+                        </Flex>
 
-                    <Flex alignItems={'center'} gap={5}>
-                        <FiActivity fontSize={24} />
-                        <Text fontSize={18} fontWeight={500}>Profile Visibility</Text>
-                    </Flex>
+                        <Flex alignItems={'center'} gap={5}>
+                            <FiMail fontSize={24} />
+                            <Text fontSize={18} fontWeight={500}>Communication Preferences</Text>
+                        </Flex>
 
-                    <Flex alignItems={'center'} gap={5}>
-                        <FiLink fontSize={24} />
-                        <Text fontSize={18} fontWeight={500}>Linked Account</Text>
+                        <Flex alignItems={'center'} gap={5}>
+                            <FiUserCheck fontSize={24} />
+                            <Text fontSize={18} fontWeight={500}>Privacy</Text>
+                        </Flex>
+
+                        <Flex alignItems={'center'} gap={5}>
+                            <FiActivity fontSize={24} />
+                            <Text fontSize={18} fontWeight={500}>Profile Visibility</Text>
+                        </Flex>
+
+                        <Flex alignItems={'center'} gap={5}>
+                            <FiLink fontSize={24} />
+                            <Text fontSize={18} fontWeight={500}>Linked Account</Text>
+                        </Flex>
                     </Flex>
-                </Flex>
+                </Box>
 
                 <Box p={6} w={500}>
                     <Text fontSize={26} fontWeight={500}>
