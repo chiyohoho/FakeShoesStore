@@ -22,7 +22,9 @@ const Header = () => {
         showToast('Đăng xuất thành công', 'Success', 'success')
         onClose()
         localStorage.removeItem('CURRENT_USER_DATA')
-        window.location.pathname === '/Favourite' || window.location.pathname === '/Cart' ? navigation('/') : window.location.reload()
+        window.location.pathname === '/Favourite' && navigation('/')
+        window.location.pathname === '/Cart' && navigation('/')
+        window.location.pathname === '/Profile' && navigation('/')
     }
 
     const handleRedirectToFavourite = () => {
