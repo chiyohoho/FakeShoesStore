@@ -13,13 +13,13 @@ const Body = () => {
         axios.get('https://6516d0e109e3260018ca59a0.mockapi.io/Api-pha-ke')
             .then(res => {
                 setDataAPI(res.data)
-                const data = localStorage.setItem('PRODUCT_DATA', JSON.stringify(res.data))
+                localStorage.setItem('PRODUCT_DATA', JSON.stringify(res.data))
             })
-    }, [])
+    })
 
     const handleRedirect = (item) => {
         setIdProduct(item.id)
-        const id = localStorage.setItem('PRODUCT_ID', JSON.stringify(item.id))
+        localStorage.setItem('PRODUCT_ID', JSON.stringify(item.id))
         navigate(`/Detail`)
     }
 

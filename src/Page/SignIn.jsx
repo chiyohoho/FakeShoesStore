@@ -24,10 +24,8 @@ const SignIn = () => {
     const onSubmit = (data) => {
         const userDataLogin = { email: userReg.email, password: data.password }
 
-        const checkLogin = userAPI.find(item => {
-            if (item.email === userDataLogin.email && item.password === userDataLogin.password) {
-                return item
-            }
+        const checkLogin = userAPI.find((item) => {
+            return item.email === userDataLogin.email && item.password === userDataLogin.password;
         })
 
         if (checkLogin) {
@@ -50,7 +48,7 @@ const SignIn = () => {
 
             })
             .catch(err => console.log(err))
-    }, [])
+    })
 
     return (
         <Center>
