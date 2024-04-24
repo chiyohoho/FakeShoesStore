@@ -24,7 +24,7 @@ const Body = () => {
     }
 
     return (
-        <Box mt={[0, 0, 0, 10, 15, 20]}>
+        <Box mt={[0, 0, 0, 10, 15, 20]} >
             <Container maxW={'95vw'}>
                 <Flex
                     bg={'white'}
@@ -64,13 +64,13 @@ const Body = () => {
                 <Box pt={[3, 4, 5, 6, 7, 8]}>
                     <Text mb={10} fontSize={22} fontWeight={'semibold'}>Trending</Text>
 
-                    <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(4, 1fr)']} gap={2} >
+                    <Grid templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(4, 1fr)']} gap={2} mt={2}>
                         {dataAPI.map((item, index) => {
                             const dataSizes = item.sizes
                             return (
-                                <GridItem key={item.id} className='card_item' onClick={() => handleRedirect(item)} cursor={'pointer'} aspectRatio={1} mb={5} w={'100%'}>
-                                    <Box mb={2} bg={'#f6f6f6'}>
-                                        <Image w={'100%'} className='card_image' src={item.image} alt={item.name} />
+                                <Box key={item.id} className='card_item' onClick={() => handleRedirect(item)} cursor={'pointer'} mb={5} w={'100%'}>
+                                    <Box w={'100%'} mb={2} bg={'#f6f6f6'}>
+                                        <Image className='card_image' src={item.image} alt={item.name} />
                                     </Box>
 
                                     <Text fontSize={20} fontWeight={'semibold'}>{item.name}</Text>
@@ -88,7 +88,7 @@ const Body = () => {
                                         })}
                                     </Flex>
                                     <Text fontWeight={500}>{(item.price * 24500).toLocaleString('vi', { style: 'currency', currency: 'VND' })}</Text>
-                                </GridItem>
+                                </Box>
                             )
                         })}
 
