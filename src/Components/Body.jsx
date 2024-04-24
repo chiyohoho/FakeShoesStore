@@ -68,8 +68,8 @@ const Body = () => {
                         {dataAPI.map((item, index) => {
                             const dataSizes = item.sizes
                             return (
-                                <Box key={item.id} className='card_item' onClick={() => handleRedirect(item)} cursor={'pointer'} mb={5} w={'100%'}>
-                                    <Box w={'100%'} mb={2} bg={'#f6f6f6'}>
+                                <Box key={item.id} className='card_item' onClick={() => handleRedirect(item)} cursor={'pointer'} mb={5} >
+                                    <Box mb={2} bg={'#f6f6f6'}>
                                         <Image className='card_image' src={item.image} alt={item.name} />
                                     </Box>
 
